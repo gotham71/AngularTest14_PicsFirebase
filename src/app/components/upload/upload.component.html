@@ -3,16 +3,16 @@
 
   <div class="col-md-4">
     <h3>Select pics</h3>
-    <div appNgDropFiles (mouseOver)="isOverDrop = $event" (mouseOver)="isOverDrop = $event" [ngClass]="{'file-over': isOverDrop}" class="well drop-zone">
+    <div appNgDropFiles [files]="files" (mouseOver)="isOverDrop = $event" [ngClass]="{'file-over': isOverDrop}" class="well drop-zone">
       <h4>Here your files</h4>
       <img src="../../../assets/drop-images.png"/>
     </div>
   </div>
-
+  
   <div class="col-md-8">
     <h4>Load files</h4>
     <button (click)="loadPics()" [disabled]="files.length === 0" type="button" class="btn btn-success">Load to Firebase</button>
-    <button type="button" class="btn btn-danger">Clean</button>
+    <button (click)="cleanPics()"type="button" class="btn btn-danger">Clean</button>
 
     <table class="table">
       <thead class="thead-dark">
@@ -22,14 +22,13 @@
           <th>Progress</th>
         </tr>
       </thead>
-      
       <tbody>
-        <tr>
-          <th>xyz</th>
-          <th>12 MB</th>
+        <tr *ngFor="let file of files">
+          <th [ngClass]="{'text-green': file.progress >= 100}">{{ file.filename }}</th>
+          <th>{{ file.file.size / 1024 / 1024 | number: '.2-2' }} MB</th>
           <th>
             <div class="progress">
-              <div class="progress-bar" role="progressbar" style="width: 25%"></div>
+              <div class="progress-bar" role="progressbar" [ngStyle]="{'width': file.progress + '%'}"></div>
             </div>
           </th>
         </tr>

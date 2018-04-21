@@ -39,7 +39,7 @@ export class NgDropFilesDirective {
 
 
   private _getTransference( event: any ) { //Compatibility hack with browsers
-    return event.dataTransfer ? event.dataTransfer : event.originaEvent.dataTransfer;
+    return event.dataTransfer ? event.dataTransfer : event.originalEvent.dataTransfer;
   }
 
   private _extractFiles( fileList: FileList ) {

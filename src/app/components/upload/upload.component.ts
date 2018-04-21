@@ -20,4 +20,8 @@ export class UploadComponent implements OnInit {
   loadPics() {
     this._loadPics.loadPicsFirebase( this.files );
   }
+
+  cleanPics() {
+    this.files = [];
+  }
 }
